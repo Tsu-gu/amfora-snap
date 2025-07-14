@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Amfora
+Exec=amfora-tsugu
+Icon=${SNAP}/meta/gui/amfora-tsugu.png
+Comment=TUI Gemini protocol browser
+Terminal=true
+Type=Application
+MimeType=x-content/unix-software;
