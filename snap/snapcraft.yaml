@@ -3,11 +3,15 @@ base: core24
 version: '1.11.0'
 summary: A fancy terminal browser for the Gemini protocol.
 description: |
+  This is an **unofficial** snap of Amfora, please report any problems to my linked repo instead of the developers.
+
   Amfora aims to be the best looking Gemini client with the most features... all in the terminal. 
   
   It does not support Gopher or other non-Web protocols - check out Bombadillo for that.
 
   It fully passes Sean Conman's client torture test, as well as the Egsam one.
+
+  I recommend saving your themes to home/USER/amfora-tsugu/common/ this directory should not change its path between refreshes (updates).
 
 grade: stable
 confinement: strict
@@ -20,6 +24,7 @@ apps:
     plugs:
       - home
       - network
+    
 
 parts:
   amfora-tsugu:
