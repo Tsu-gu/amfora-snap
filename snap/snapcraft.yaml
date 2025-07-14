@@ -1,0 +1,34 @@
+name: amfora-tsugu
+base: core24
+version: '1.11.0'
+summary: A fancy terminal browser for the Gemini protocol.
+description: |
+  Amfora aims to be the best looking Gemini client with the most features... all in the terminal. 
+  
+  It does not support Gopher or other non-Web protocols - check out Bombadillo for that.
+
+  It fully passes Sean Conman's client torture test, as well as the Egsam one.
+
+grade: stable
+confinement: strict
+
+apps:
+  amfora-tsugu:
+    command: usr/bin/amfora
+    environment:
+      HOME: "$SNAP_USER_DATA"  
+    plugs:
+      - home
+      - network
+
+parts:
+  amfora-tsugu:
+    source: .
+    plugin: dump
+    override-build: |
+      wget https://github.com/makew0rld/amfora/releases/download/v${SNAPCRAFT_PROJECT_VERSION}/amfora_${SNAPCRAFT_PROJECT_VERSION}_linux_64-bit
+      mkdir -p $CRAFT_PART_INSTALL/usr/bin
+      cp amfora_${SNAPCRAFT_PROJECT_VERSION}_linux_64-bit $CRAFT_PART_INSTALL/usr/bin/amfora
+      chmod +x $CRAFT_PART_INSTALL/usr/bin/amfora
+    build-packages:
+      - wget
