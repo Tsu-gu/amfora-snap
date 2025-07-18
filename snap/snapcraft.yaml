@@ -28,6 +28,8 @@ apps:
     plugs:
       - home
       - network
+      - desktop
+      - desktop-legacy
 
 parts:
   amfora-tsugu:
