@@ -16,6 +16,10 @@ description: |
 grade: stable
 confinement: strict
 
+platforms:
+  amd64:
+  arm64:
+
 apps:
   amfora-tsugu:
     command: usr/bin/amfora
@@ -24,16 +28,21 @@ apps:
     plugs:
       - home
       - network
-    
 
 parts:
   amfora-tsugu:
     source: .
     plugin: dump
     override-build: |
-      wget https://github.com/makew0rld/amfora/releases/download/v${SNAPCRAFT_PROJECT_VERSION}/amfora_${SNAPCRAFT_PROJECT_VERSION}_linux_64-bit
+      if [ "$CRAFT_ARCH_BUILD_FOR" = "amd64" ]; then
+        ARCH_SUFFIX="64-bit"
+      else
+        ARCH_SUFFIX="arm64"
+      fi
+      
+      wget https://github.com/makew0rld/amfora/releases/download/v${SNAPCRAFT_PROJECT_VERSION}/amfora_${SNAPCRAFT_PROJECT_VERSION}_linux_${ARCH_SUFFIX}
       mkdir -p $CRAFT_PART_INSTALL/usr/bin
-      cp amfora_${SNAPCRAFT_PROJECT_VERSION}_linux_64-bit $CRAFT_PART_INSTALL/usr/bin/amfora
+      cp amfora_${SNAPCRAFT_PROJECT_VERSION}_linux_${ARCH_SUFFIX} $CRAFT_PART_INSTALL/usr/bin/amfora
       chmod +x $CRAFT_PART_INSTALL/usr/bin/amfora
     build-packages:
       - wget
